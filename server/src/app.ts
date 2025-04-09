@@ -11,15 +11,33 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl requests)
+      if (!origin) return callback(null, true);
+
+      if (origin.includes("localhost")) return callback(null, true);
+
+      if (origin.includes("vercel.app")) return callback(null, true);
+
+      if (origin.includes("onrender.com")) return callback(null, true);
+
+
+      // Otherwise, deny the request
+      
+      callback(new Error("Not allowed by CORS"));
+    },
+
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.static('../client/dist'));
-// Middleware
-// app.use(cors({
-//   origin: [
-//     'http://localhost:5173', // Dev client
-//     'https://main.dsqz7c4wzmthj.amplifyapp.com/', // :triangular_flag_on_post: Replace with your real Amplify frontend URL
-//   ],
-//   credentials: true,
-// }));
 app.use(express.json());
 
 // Routes
