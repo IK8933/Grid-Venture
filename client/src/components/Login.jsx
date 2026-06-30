@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default function Login({ onAuthSuccess }) {
   const API = import.meta.env.VITE_API_URL;
+  console.log("API URL:", API);
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
 
