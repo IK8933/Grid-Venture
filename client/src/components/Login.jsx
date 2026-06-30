@@ -16,7 +16,10 @@ export default function Login({ onAuthSuccess }) {
 
     try {
       // const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      const res =await axios.post(`${API}/api/auth/login`, form);
+      const url = `${API}/api/auth/login`;
+console.log("Login URL:", url);
+
+const res = await axios.post(url, form);
       localStorage.setItem('token', res.data.token);
       onAuthSuccess(res.data.user);
     } catch (err) {
