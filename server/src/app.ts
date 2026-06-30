@@ -1,10 +1,9 @@
 import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
-import { authRouter } from './routes/api/authRoutes';
-
+import authRouter from './routes/authRoutes';
 import connectToDB from './config/connection';
-import { mapRouter } from './routes/api/mapRoutes';
+//import { mapRouter } from './routes/api/mapRoutes';
 
 
 dotenv.config();
@@ -43,9 +42,9 @@ app.use(express.json());
 // Routes
 
 app.use('/api/auth', authRouter);
-console.log('✅ /api/auth routes mounted');
+//console.log('✅ /api/auth routes mounted');
 
-app.use('/api/game', mapRouter);
+//app.use('/api/game', mapRouter);
 // console.log(app._router.stack.map((r: any) => r.route?.path || r.name).filter(Boolean));
 
 
